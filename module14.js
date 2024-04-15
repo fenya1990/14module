@@ -1,7 +1,7 @@
 //задание 1
 const parser = new DOMParser();
-//console.log('parser', parser);
-const xmlString =`
+
+const xmlString = `
 <list>
   <student>
     <name lang="en">
@@ -21,56 +21,49 @@ const xmlString =`
   </student>
 </list>
 `;
-//console.log('xmlString', xmlString);
+
 const xmlDOM = parser.parseFromString(xmlString, "text/xml");
-const studentNode = xmlDOM.querySelector("name");
-const ageNode = studentNode.querySelector("age");
-const profNode = studentNode.querySelector("prof");
-//console.log('name', name);
-//console.log('age', age);
-//console.log('prof', prof);
-const result = {
- name: 'Ivan Ivanov',
-  age:'35',
-  prof: 'teacher',
-};
-const result2 = {
-  name:'Петр Петров',
-  age:'58',
-  prof:'driver'
-};
-console.log('result', result);
-console.log('result2', result2);
+
+const studentNodes = xmlDOM.querySelectorAll("student");
+
+const result = [];
+
+for (let i = 0; i < studentNodes.length; i++) {
+  const nameNode = studentNodes[i].querySelector("name");
+  const firstName = nameNode.querySelector("first").textContent;
+  const secondName = nameNode.querySelector("second").textContent;
+  const ageNode = studentNodes[i].querySelector("age");
+  const profNode = studentNodes[i].querySelector("prof");
+
+  result.push({
+    name: `${firstName} ${secondName}`,
+    age: ageNode.textContent,
+    prof: profNode.textContent,
+  });
+}
+
+console.log(result);
 
 //задание2
-const jsonString = `
-{
- "list": [
-  {
-   "name": "Petr",
-   "age": "20",
-   "prof": "mechanic"
-  },
-  {
-   "name": "Vova",
-   "age": "60",
-   "prof": "pilot"
-  }
- ]
-}
-`;
-const data = JSON.parse(jsonString);
-const  list= data.list;
-const result = {
-  name: 'Petr',
-  age: '20',
-  prof: 'mechanic'
-};
-const result2 = {
-  name: 'Vova',
-  age: '60',
-  prof: 'pilot'
-};
-console.log(result)
-console.log(result2)
-
+const jsonString = `{
+  "list": [
+   {
+    "name": "Petr",
+    "age": 20,
+    "prof": "mechanic"
+   },
+   {
+    "name": "Vova",
+    "age": 60,
+    "prof": "pilot"
+   }
+  ]
+ }`;
+ 
+ const data = JSON.parse(jsonString);
+ const list = data.list;
+ const result = list[0];
+ const result2 = list[1];
+ 
+ console.log(result);
+ console.log(result2);
