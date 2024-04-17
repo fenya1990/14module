@@ -6,6 +6,7 @@ function task3() {
       xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 300) {
           console.log('Результат: ', JSON.parse(xhr.response));
+         renderImages(responseData);
         } else {
           console.log('Произошла ошибка: ', xhr.status);
         }
