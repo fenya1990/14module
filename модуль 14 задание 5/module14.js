@@ -27,8 +27,16 @@ btn.addEventListener('click', () => {
           result.innerHTML = JSON.stringify(data, null, 2);
         console.log(result);
       //return result;
+         renderImages(data);
         })
         .catch((error) => {
           console.log('Произошла ошибка при запросе данных');
         });
-    });
+ function renderImages(imagesData) {
+          const imagesContainer = document.getElementById('imagesContainer'); 
+          imagesContainer.innerHTML = ''; 
+          imagesData.forEach(image => {
+            const imgElement = document.createElement('img');
+            imgElement.src = image.url; 
+            imagesContainer.appendChild(imgElement);    
+          });
