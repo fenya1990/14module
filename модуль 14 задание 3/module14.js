@@ -15,6 +15,14 @@ function task3() {
       console.log("Нельзя больше 10")
     }
   }
-  
+  function renderImages(imagesData) {
+    const imagesContainer = document.getElementById('imagesContainer'); 
+    imagesContainer.innerHTML = ''; 
+    imagesData.forEach(image => {
+      const imgElement = document.createElement('img');
+      imgElement.src = image.url; 
+      imagesContainer.appendChild(imgElement);
+    });
+  }  
   const btn = document.querySelector('#btn');
   btn.addEventListener("click", task3);
